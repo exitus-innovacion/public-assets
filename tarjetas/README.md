@@ -1,6 +1,6 @@
-# claude-tarjetas
+# tarjetas
 
-Diseño, comportamiento y prompts de las tarjetas interactivas que usa la skill **exitus-onboarding** de Claude. Se publica aquí para que cada tarjeta cargue este archivo en lugar de escribirlo completo, y así aparezca casi al instante.
+Carpeta `tarjetas/` del repositorio [`exitus-innovacion/public-assets`](https://github.com/exitus-innovacion/public-assets). Contiene el diseño, el comportamiento y los prompts de las tarjetas interactivas que usa la skill **exitus-onboarding** de Claude. Se publica aquí para que cada tarjeta cargue este archivo en lugar de escribirlo completo, y así aparezca casi al instante.
 
 **No contiene datos sensibles:** solo estilos, el código de la tarjeta y los prompts de exportación (los mismos que ya están en la skill).
 
@@ -14,20 +14,19 @@ Diseño, comportamiento y prompts de las tarjetas interactivas que usa la skill 
 
 ## Publicar por primera vez
 
-1. Crea un repositorio **público** en GitHub, por ejemplo `exitus-credit/claude-tarjetas`.
-2. Sube `tarjetas.js`, `tarjetas.min.js`, `prueba.html` y este `README.md` a la rama `main`.
-3. Copia el **hash completo del commit** (40 caracteres). En GitHub aparece al dar clic en el commit, o con `git rev-parse HEAD`.
-4. Arma la URL con este formato y ábrela en el navegador para confirmar que se ve el archivo:
+1. En el repositorio público `exitus-innovacion/public-assets`, crea la carpeta `tarjetas/` en el primer nivel y sube ahí `tarjetas.js`, `tarjetas.min.js`, `prueba.html` y este `README.md`.
+2. Copia el **hash completo del commit** (40 caracteres). En GitHub aparece al dar clic en el commit, o con `git rev-parse HEAD`.
+3. Arma la URL sustituyendo `HASH` y ábrela en el navegador para confirmar que se ve el archivo:
    ```
-   https://cdn.jsdelivr.net/gh/ORGANIZACION/REPOSITORIO@HASH/tarjetas.min.js
+   https://cdn.jsdelivr.net/gh/exitus-innovacion/public-assets@HASH/tarjetas/tarjetas.min.js
    ```
-5. Pega esa URL en la skill, en `references/tarjetas-abiertas.md`, en la línea `URL_TARJETAS:` de la sección 0 (sustituye `PENDIENTE`), y vuelve a empaquetar e instalar la skill.
+4. Pega esa URL en la skill, en `references/tarjetas-abiertas.md`, en la línea `URL_TARJETAS:` de la sección 0 (la que hoy dice `HASH`), y vuelve a empaquetar e instalar la skill.
 
-Mientras la línea diga `PENDIENTE`, la skill sigue funcionando con la versión completa, solo que más lenta.
+Mientras la URL de la skill diga `HASH`, la skill sigue funcionando con la versión completa, solo que más lenta.
 
 ## Actualizar
 
-1. Edita `tarjetas.js` y regenera la versión minificada:
+1. Edita `tarjetas/tarjetas.js` y regenera la versión minificada desde la carpeta `tarjetas/`:
    ```
    npx terser tarjetas.js -c -m --comments '/^!/' -o tarjetas.min.js
    ```
@@ -39,6 +38,7 @@ Cambia también el número de versión en `window.EXITUS.version` y en el encabe
 ## Reglas de seguridad
 
 - **Usa siempre el hash del commit en la URL**, nunca `@main` ni `@latest`. Con el hash, lo que carga la tarjeta no puede cambiar aunque alguien modifique el repositorio; solo cambia cuando ustedes actualizan la URL en la skill.
+- Cualquier archivo nuevo en `public-assets` también será público: revisen bien lo que se sube a ese repositorio.
 - Protege la rama `main` (cambios solo por pull request con revisión) y exige verificación en dos pasos a quienes tengan acceso de escritura.
 - No agregues datos de clientes, credenciales ni información interna: el repositorio es público.
 
